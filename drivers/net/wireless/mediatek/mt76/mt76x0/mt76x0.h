@@ -26,7 +26,7 @@
 #include <linux/debugfs.h>
 
 #include "../mt76.h"
-#include "regs.h"
+#include "../mt76x02_regs.h"
 
 #define MT_CALIBRATE_INTERVAL		(4 * HZ)
 
