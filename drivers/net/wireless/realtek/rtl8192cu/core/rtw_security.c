@@ -1838,7 +1838,7 @@ _func_enter_;
                             );
 
 
-	payload_remainder = (plen-8) % 16;
+    payload_remainder = (plen-8) % 16;
     num_blocks = (plen-8) / 16;
 
     /* Find start of payload */
@@ -1851,7 +1851,7 @@ _func_enter_;
     bitwise_xor(aes_out, mic_header2, chain_buffer);
     aes128k128d(key, chain_buffer, aes_out);
 
-	for (i = 0; i < num_blocks; i++)
+    for (i = 0; i < num_blocks; i++)
     {
         bitwise_xor(aes_out, &message[payload_index], chain_buffer);
 
