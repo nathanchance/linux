@@ -62,7 +62,7 @@ static const char * const allo_piano_mode_texts[] = {
 	"2.2",
 };
 
-static const SOC_ENUM_SINGLE_DECL(allo_piano_mode_enum,
+static SOC_ENUM_SINGLE_DECL(allo_piano_mode_enum,
 		0, 0, allo_piano_mode_texts);
 
 static const char * const allo_piano_dual_mode_texts[] = {
@@ -71,7 +71,7 @@ static const char * const allo_piano_dual_mode_texts[] = {
 	"Dual-Stereo",
 };
 
-static const SOC_ENUM_SINGLE_DECL(allo_piano_dual_mode_enum,
+static SOC_ENUM_SINGLE_DECL(allo_piano_dual_mode_enum,
 		0, 0, allo_piano_dual_mode_texts);
 
 static const char * const allo_piano_dsp_low_pass_texts[] = {
@@ -92,7 +92,7 @@ static const char * const allo_piano_dsp_low_pass_texts[] = {
 	"200",
 };
 
-static const SOC_ENUM_SINGLE_DECL(allo_piano_enum,
+static SOC_ENUM_SINGLE_DECL(allo_piano_enum,
 		0, 0, allo_piano_dsp_low_pass_texts);
 
 static int __snd_allo_piano_dsp_program(struct snd_soc_pcm_runtime *rtd,
