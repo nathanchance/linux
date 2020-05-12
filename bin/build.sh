@@ -82,6 +82,7 @@ function kmake() {
         HOSTLD="${HOSTLD}" \
         HOSTLDFLAGS="${HOSTLDFLAGS}" \
         INSTALL_MOD_PATH=rootfs \
+        KCFLAGS="${KCFLAGS--Werror}" \
         LD="${LD}" \
         NM="${NM}" \
         O="$(realpath -m --relative-to="${BASE}" "${O}")" \
