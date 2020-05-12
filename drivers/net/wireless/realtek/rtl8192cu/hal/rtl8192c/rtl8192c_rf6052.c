@@ -485,11 +485,6 @@ static void getTxPowerWriteValByRegulatory(
 			//RTPRINT(FBT, BT_TRACE, ("Tx Power (-6)\n"));
 			writeVal = writeVal - 0x06060606;
 		}
-		else if(pdmpriv->DynamicTxHighPowerLvl == TxHighPwrLevel_BT2)
-		{
-			//RTPRINT(FBT, BT_TRACE, ("Tx Power (-0)\n"));
-			writeVal = writeVal;
-		}
 		*(pOutWriteVal+rf) = writeVal;
 	}
 }
