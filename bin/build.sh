@@ -60,6 +60,7 @@ function set_toolchain() {
         "${OBJCOPY:=llvm-objcopy}" \
         "${OBJDUMP:=llvm-objdump}" \
         "${OBJSIZE:=llvm-size}" \
+        "${READELF:=llvm-readelf}" \
         "${STRIP:=llvm-strip}"
 
     printf '\n\e[01;32mToolchain location:\e[0m %s\n\n' "$(dirname "$(command -v "${CC##* }")")"
@@ -89,6 +90,7 @@ function kmake() {
         OBJCOPY="${OBJCOPY}" \
         OBJDUMP="${OBJDUMP}" \
         OBJSIZE="${OBJSIZE}" \
+        READELF="${READELF}" \
         STRIP="${STRIP}" \
         ${V:+V=${V}} \
         "${@}"
