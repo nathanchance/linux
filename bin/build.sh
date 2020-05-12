@@ -64,6 +64,9 @@ function set_toolchain() {
         "${READELF:=llvm-readelf}" \
         "${STRIP:=llvm-strip}"
 
+    # Resolve O=
+    O=$(readlink -f "${O}")
+
     printf '\n\e[01;32mToolchain location:\e[0m %s\n\n' "$(dirname "$(command -v "${CC##* }")")"
     printf '\e[01;32mToolchain version:\e[0m %s \n\n' "$("${CC##* }" --version | head -n1)"
 }
@@ -112,6 +115,7 @@ function build_kernel() {
     [[ -z ${FINAL_MAKE_TARGETS[*]} ]] && FINAL_MAKE_TARGETS=("${MY_TARGETS[@]}")
 
     # Build the kernel with targets
+    rm -rf "${O}"/rootfs
     kmake "${CONFIG_MAKE_TARGETS[@]}" "${FINAL_MAKE_TARGETS[@]}"
 
     # Copy over new config if needed
@@ -121,7 +125,7 @@ function build_kernel() {
     fi
 
     # Let the user know where the kernel will be (if we built one)
-    KERNEL=$(readlink -f "${O}")/arch/${ARCH}/boot/${KERNEL_IMAGE}
+    KERNEL=${O}/arch/${ARCH}/boot/${KERNEL_IMAGE}
     [[ -f ${KERNEL} ]] && printf '\n\e[01;32mKernel is now available at:\e[0m %s\n' "${KERNEL}"
 }
 
