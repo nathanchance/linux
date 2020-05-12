@@ -715,7 +715,7 @@ static irqreturn_t unicam_isr(int irq, void *dev)
 	/* Write value back to clear the interrupts */
 	reg_write(cfg, UNICAM_ISTA, ista);
 
-	if (!(sta && (UNICAM_IS | UNICAM_PI0)))
+	if (!(sta & (UNICAM_IS | UNICAM_PI0)))
 		return IRQ_HANDLED;
 
 	if (ista & UNICAM_FSI) {
