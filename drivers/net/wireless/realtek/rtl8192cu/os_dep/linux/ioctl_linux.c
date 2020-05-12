@@ -4910,7 +4910,7 @@ static int rtw_p2p_get_invitation_procedure(struct net_device *dev,
 		sprintf(inv_proc_str, "\nIP=-1");
 	} else
 	{
-		if (attr_content[0] && 0x20)
+		if (attr_content[0] & 0x20)
 		{
 			sprintf(inv_proc_str, "\nIP=1");
 		} else
