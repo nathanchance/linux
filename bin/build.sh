@@ -50,6 +50,7 @@ function set_toolchain() {
         "${CC:=${CCACHE:+ccache }clang}" \
         "${HOSTAR:=llvm-ar}" \
         "${HOSTCC:=${CCACHE:+ccache }clang}" \
+        "${HOSTCXX:=${CCACHE:+ccache }clang++}" \
         "${HOSTLD:=ld.lld}" \
         "${HOSTLDFLAGS:=-fuse-ld=lld}" \
         "${JOBS:="$(nproc)"}" \
@@ -79,6 +80,7 @@ function kmake() {
         ${CROSS_COMPILE:+CROSS_COMPILE="${CROSS_COMPILE}"} \
         HOSTAR="${AR}" \
         HOSTCC="${HOSTCC}" \
+        HOSTCXX="${HOSTCXX}" \
         HOSTLD="${HOSTLD}" \
         HOSTLDFLAGS="${HOSTLDFLAGS}" \
         INSTALL_MOD_PATH=rootfs \
