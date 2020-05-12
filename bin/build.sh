@@ -46,7 +46,6 @@ function set_toolchain() {
 
     # Set default values if user did not supply them above
     true \
-        "${AS:=${CROSS_COMPILE}as}" \
         "${AR:=llvm-ar}" \
         "${CC:=${CCACHE:+ccache }clang}" \
         "${HOSTAR:=llvm-ar}" \
@@ -55,6 +54,7 @@ function set_toolchain() {
         "${HOSTLDFLAGS:=-fuse-ld=lld}" \
         "${JOBS:="$(nproc)"}" \
         "${LD:=ld.lld}" \
+        "${LLVM_IAS:=0}" \
         "${NM:=llvm-nm}" \
         "${O:=${BASE}/out/${ARCH}}" \
         "${OBJCOPY:=llvm-objcopy}" \
@@ -72,7 +72,6 @@ function kmake() {
         -C "${BASE}" \
         -j"${JOBS}" \
         ${COND_MAKE_ARGS:+"${COND_MAKE_ARGS[@]}"} \
-        AS="${AS}" \
         AR="${AR}" \
         ARCH="${ARCH}" \
         CC="${CC}" \
@@ -84,6 +83,7 @@ function kmake() {
         INSTALL_MOD_PATH=rootfs \
         KCFLAGS="${KCFLAGS--Werror}" \
         LD="${LD}" \
+        LLVM_IAS="${LLVM_IAS}" \
         NM="${NM}" \
         O="$(realpath -m --relative-to="${BASE}" "${O}")" \
         OBJCOPY="${OBJCOPY}" \
