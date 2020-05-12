@@ -93,6 +93,7 @@ function kmake() {
         HOSTLDFLAGS="${HOSTLDFLAGS}" \
         INSTALL_DTBS_PATH=rootfs \
         INSTALL_MOD_PATH=rootfs \
+        KCFLAGS="${KCFLAGS--Werror}" \
         LD="${LD}" \
         LLVM_IAS="${LLVM_IAS}" \
         NM="${NM}" \
