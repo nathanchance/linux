@@ -29,7 +29,12 @@ function parse_parameters() {
             KERNEL_IMAGE=zImage
             ;;
 
-        # We only support arm at this point but that might change eventually
+        arm64)
+            CROSS_COMPILE=aarch64-linux-gnu-
+            CONFIG=arch/arm64/configs/bcmrpi3_defconfig
+            KERNEL_IMAGE=Image
+            ;;
+
         *)
             echo "\${ARCH} value of '${ARCH}' is not supported!" 2>&1
             exit 22
