@@ -19,7 +19,7 @@ function parse_parameters() {
         esac
         shift
     done
-    [[ -z ${MY_TARGETS[*]} ]] && MY_TARGETS=(all modules_install)
+    [[ -z ${MY_TARGETS[*]} ]] && MY_TARGETS=(all dtbs_install modules_install)
 
     # Handle architecture specific variables
     case ${ARCH:=arm} in
@@ -91,6 +91,7 @@ function kmake() {
         HOSTCXX="${HOSTCXX}" \
         HOSTLD="${HOSTLD}" \
         HOSTLDFLAGS="${HOSTLDFLAGS}" \
+        INSTALL_DTBS_PATH=rootfs \
         INSTALL_MOD_PATH=rootfs \
         KCFLAGS="${KCFLAGS--Werror}" \
         LD="${LD}" \
