@@ -293,7 +293,7 @@ vchiq_prepare_bulk_data(VCHIQ_BULK_T *bulk, VCHI_MEM_HANDLE_T memhandle,
 		return VCHIQ_ERROR;
 
 	bulk->handle = memhandle;
-	bulk->data = (void *)VC_SAFE(pagelistinfo->dma_addr);
+	bulk->data = (void *)(uintptr_t)VC_SAFE(pagelistinfo->dma_addr);
 
 	/*
 	 * Store the pagelistinfo address in remote_data,
