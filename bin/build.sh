@@ -70,7 +70,7 @@ function set_toolchain() {
         "${STRIP:=llvm-strip}"
 
     # Resolve O=
-    O=$(readlink -f "${O}")
+    O=$(readlink -f -m "${O}")
 
     printf '\n\e[01;32mToolchain location:\e[0m %s\n\n' "$(dirname "$(command -v "${CC##* }")")"
     printf '\e[01;32mToolchain version:\e[0m %s \n\n' "$("${CC##* }" --version | head -n1)"
