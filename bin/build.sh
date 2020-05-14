@@ -31,6 +31,7 @@ function parse_parameters() {
 
         arm64)
             CROSS_COMPILE=aarch64-linux-gnu-
+            CROSS_COMPILE_COMPAT=arm-linux-gnueabi-
             CONFIG=arch/arm64/configs/bcmrpi3_defconfig
             KERNEL_IMAGE=Image
             : "${LLVM_IAS:=1}"
@@ -87,6 +88,7 @@ function kmake() {
         ARCH="${ARCH}" \
         CC="${CC}" \
         ${CROSS_COMPILE:+CROSS_COMPILE="${CROSS_COMPILE}"} \
+        ${CROSS_COMPILE_COMPAT:+CROSS_COMPILE_COMPAT="${CROSS_COMPILE_COMPAT}"} \
         HOSTAR="${AR}" \
         HOSTCC="${HOSTCC}" \
         HOSTCXX="${HOSTCXX}" \
