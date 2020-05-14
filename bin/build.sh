@@ -33,6 +33,7 @@ function parse_parameters() {
             CROSS_COMPILE=aarch64-linux-gnu-
             CONFIG=arch/arm64/configs/bcmrpi3_defconfig
             KERNEL_IMAGE=Image
+            : "${LLVM_IAS:=1}"
             ;;
 
         *)
