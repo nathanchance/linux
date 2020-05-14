@@ -22,7 +22,7 @@ function parse_parameters() {
     [[ -z ${MY_TARGETS[*]} ]] && MY_TARGETS=(all dtbs_install modules_install)
 
     # Handle architecture specific variables
-    case ${ARCH:=arm} in
+    case ${ARCH:=arm64} in
         arm)
             CROSS_COMPILE=arm-linux-gnueabi-
             CONFIG=arch/arm/configs/bcm2709_defconfig
