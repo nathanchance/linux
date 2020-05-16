@@ -1355,9 +1355,8 @@ static const struct clk_ops bcm2835_vpu_clock_clk_ops = {
 static bool bcm2835_clk_is_claimed(const char *name);
 
 static struct clk_hw *bcm2835_register_pll(struct bcm2835_cprman *cprman,
-					   const void *pll_data)
+					   const struct bcm2835_pll_data *data)
 {
-	const struct bcm2835_pll_data *data = pll_data;
 	struct bcm2835_pll *pll;
 	struct clk_init_data init;
 	int ret;
@@ -1390,9 +1389,8 @@ static struct clk_hw *bcm2835_register_pll(struct bcm2835_cprman *cprman,
 
 static struct clk_hw *
 bcm2835_register_pll_divider(struct bcm2835_cprman *cprman,
-			     const void *divider_data)
+			     const struct bcm2835_pll_divider_data *data)
 {
-	const struct bcm2835_pll_divider_data *data = divider_data;
 	struct bcm2835_pll_divider *divider;
 	struct clk_init_data init;
 	const char *divider_name;
@@ -1457,9 +1455,8 @@ bcm2835_register_pll_divider(struct bcm2835_cprman *cprman,
 }
 
 static struct clk_hw *bcm2835_register_clock(struct bcm2835_cprman *cprman,
-					  const void *clock_data)
+					  const struct bcm2835_clock_data *data)
 {
-	const struct bcm2835_clock_data *data = clock_data;
 	struct bcm2835_clock *clock;
 	struct clk_init_data init;
 	const char *parents[1 << CM_SRC_BITS];
@@ -1528,15 +1525,13 @@ static struct clk_hw *bcm2835_register_clock(struct bcm2835_cprman *cprman,
 	return &clock->hw;
 }
 
-static struct clk_hw *bcm2835_register_gate(struct bcm2835_cprman *cprman,
-					    const void *gate_data)
+static struct clk *bcm2835_register_gate(struct bcm2835_cprman *cprman,
+					 const struct bcm2835_gate_data *data)
 {
-	const struct bcm2835_gate_data *data = gate_data;
-
-	return clk_hw_register_gate(cprman->dev, data->name, data->parent,
-				    CLK_IGNORE_UNUSED | CLK_SET_RATE_GATE,
-				    cprman->regs + data->ctl_reg,
-				    CM_GATE_BIT, 0, &cprman->regs_lock);
+	return clk_register_gate(cprman->dev, data->name, data->parent,
+				 CLK_IGNORE_UNUSED | CLK_SET_RATE_GATE,
+				 cprman->regs + data->ctl_reg,
+				 CM_GATE_BIT, 0, &cprman->regs_lock);
 }
 
 typedef struct clk_hw *(*bcm2835_clk_register)(struct bcm2835_cprman *cprman,
@@ -1548,7 +1543,7 @@ struct bcm2835_clk_desc {
 };
 
 /* assignment helper macros for different clock types */
-#define _REGISTER(f, s, ...) { .clk_register = f, \
+#define _REGISTER(f, s, ...) { .clk_register = (bcm2835_clk_register)f, \
 			       .supported = s,				\
 			       .data = __VA_ARGS__ }
 #define REGISTER_PLL(s, ...)	_REGISTER(&bcm2835_register_pll,	\
