@@ -829,6 +829,8 @@ static uint32_t dwc_otg_handle_pwrdn_stschng_intr(dwc_otg_device_t *otg_dev)
 		retval = dwc_otg_handle_pwrdn_idsts_change(otg_dev);
 	} else if (gpwrdn.b.bsessvld ^ gpwrdn_temp.b.bsessvld) {
 		retval = dwc_otg_handle_pwrdn_session_change(core_if);
+	} else {
+		retval = 1;
 	}
 
 	return retval;
