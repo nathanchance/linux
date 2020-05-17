@@ -259,12 +259,12 @@ struct __attribute__((packed)) fiq_split_dma_slot {
 	u8 buf[188];
 };
 
-struct fiq_dma_channel {
-	struct __attribute__((packed)) fiq_split_dma_slot index[6];
+struct __attribute__((packed)) fiq_dma_channel {
+	struct fiq_split_dma_slot index[6];
 };
 
-struct fiq_dma_blob {
-	struct __attribute__((packed)) fiq_dma_channel channel[0];
+struct __attribute__((packed)) fiq_dma_blob {
+	struct fiq_dma_channel channel[0];
 };
 
 /**
