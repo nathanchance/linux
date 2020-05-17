@@ -1597,7 +1597,7 @@ static int ov5647_probe(struct i2c_client *client)
 		ret = sensor->ctrls.error;
 		dev_err(&client->dev, "%s control init failed (%d)\n",
 			__func__, ret);
-		goto error;
+		goto mutex_remove;
 	}
 
 	ret = v4l2_fwnode_device_parse(&client->dev, &props);
