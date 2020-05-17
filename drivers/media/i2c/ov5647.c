@@ -1119,10 +1119,10 @@ static int ov5647_enum_mbus_code(struct v4l2_subdev *sd,
 	if (code->index == 0 && ARRAY_SIZE(supported_modes_8bit))
 		code->code = MEDIA_BUS_FMT_SBGGR8_1X8;
 	else if (code->index == 0 && ARRAY_SIZE(supported_modes_8bit) == 0 &&
-		 ARRAY_SIZE(supported_modes_10bit))
+		 ARRAY_SIZE(supported_modes_10bit) != 0)
 		code->code = MEDIA_BUS_FMT_SBGGR10_1X10;
-	else if (code->index == 1 && ARRAY_SIZE(supported_modes_8bit) &&
-		 ARRAY_SIZE(supported_modes_10bit))
+	else if (code->index == 1 && ARRAY_SIZE(supported_modes_8bit) != 0 &&
+		 ARRAY_SIZE(supported_modes_10bit) != 0)
 		code->code = MEDIA_BUS_FMT_SBGGR10_1X10;
 	else
 		return -EINVAL;
