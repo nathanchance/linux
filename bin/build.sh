@@ -10,7 +10,7 @@ function parse_parameters() {
     MY_TARGETS=()
     while ((${#})); do
         case ${1} in
-            */ | *.i | *.o | vmlinux | zImage | modules) MY_TARGETS=("${MY_TARGETS[@]}" "${1}") ;;
+            */ | *.i | *.ko | *.o | vmlinux | zImage | modules) MY_TARGETS=("${MY_TARGETS[@]}" "${1}") ;;
             *=*) export "${1?}" ;;
             -i | --incremental) INCREMENTAL=true ;;
             -j | --jobs) JOBS=${1} ;;
