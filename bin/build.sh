@@ -21,6 +21,9 @@ function parse_parameters() {
     done
     [[ -z ${MY_TARGETS[*]} ]] && MY_TARGETS=(all dtbs_install modules_install)
 
+    # If V=, make sure -v is also set
+    [[ -n ${V:-} ]] && VERBOSE=true
+
     # Handle architecture specific variables
     case ${ARCH:=arm64} in
         arm)
