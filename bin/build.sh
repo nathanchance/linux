@@ -86,8 +86,7 @@ function kmake() {
     set -x
     time make \
         -C "${BASE}" \
-        -j"${JOBS}" \
-        ${COND_MAKE_ARGS:+"${COND_MAKE_ARGS[@]}"} \
+        -"${SILENT_MAKE_FLAG:-}"kj"${JOBS}" \
         AR="${AR}" \
         ARCH="${ARCH}" \
         CC="${CC}" \
@@ -117,7 +116,7 @@ function kmake() {
 
 function build_kernel() {
     # Build silently by default
-    ${VERBOSE:=false} || COND_MAKE_ARGS=(-s)
+    ${VERBOSE:=false} || SILENT_MAKE_FLAG=s
 
     # Build list of configure targets
     CONFIG_MAKE_TARGETS=("${CONFIG##*/}")
